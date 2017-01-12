@@ -11,7 +11,6 @@ public class BtSoPipeline implements Pipeline {
 	
 	@Override
 	public void process(ResultItems resultItems, Task task) {
-		// TODO Auto-generated method stub
 		try {
 			FileWriter fw = new FileWriter("D:\\magnet.txt", true);
 			String magnet = resultItems.get("magnet");

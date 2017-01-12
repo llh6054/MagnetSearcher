@@ -13,7 +13,7 @@ public class ProcessUtil {
 	public static boolean resultNeedProcess(String keywords) {
 		Pattern pattern = Pattern.compile("[a-zA-Z]+-\\d+");
 		Matcher matcher = pattern.matcher(keywords);
-		if(matcher.matches());
+		if(matcher.matches())
 			needProcess = true;
 		return needProcess;
 	}

@@ -38,7 +38,7 @@ public class BtSoKeyWordsProcessor implements PageProcessor {
 	@Override
 	public void process(Page page) {
 		List<String> targetUrls = page.getHtml().links().regex("https://btso.pw/magnet/detail/hash/\\S+").all();
-		
+//links is more than size since MB is is not in the title		
 		if(ProcessUtil.needProcess) {
 			List<String> sizes = page.getHtml().regex("[0-9]+\\.[0-9]+GB").regex("[0-9]+\\.[0-9]+").all();
 			if(sizes.isEmpty())
