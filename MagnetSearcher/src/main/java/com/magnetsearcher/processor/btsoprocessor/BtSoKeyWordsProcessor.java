@@ -1,8 +1,9 @@
 package com.magnetsearcher.processor.btsoprocessor;
 
+import java.text.Collator;
 import java.util.List;
-
 import com.magnetsearcher.pipeline.BtSoPipeline;
+import com.magnetsearcher.util.ProcessUtil;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -10,6 +11,18 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 public class BtSoKeyWordsProcessor implements PageProcessor {
+
+	private static boolean taskFinished = false;
+	
+	public static boolean isTaskFinished() {
+		return taskFinished;
+	}
+
+
+	public static void setTaskFinished(boolean taskFinished) {
+		BtSoKeyWordsProcessor.taskFinished = taskFinished;
+	}
+
 
 	private Site site = Site.me()
     		.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0")
@@ -25,12 +38,29 @@ public class BtSoKeyWordsProcessor implements PageProcessor {
 	@Override
 	public void process(Page page) {
 		List<String> targetUrls = page.getHtml().links().regex("https://btso.pw/magnet/detail/hash/\\S+").all();
-		List<String> pageUrls = page.getHtml().links().regex("https://btso.pw/search/\\S+/page/[0-9]+").all();
-		page.addTargetRequests(pageUrls);
-		for (String targetUrl : targetUrls) {
-			Spider.create(new BtSoTargetMagnetProcessor()).addUrl(targetUrl).addPipeline(new BtSoPipeline()).run();
+		
+		if(ProcessUtil.needProcess) {
+			List<String> sizes = page.getHtml().regex("[0-9]+\\.[0-9]+GB").regex("[0-9]+\\.[0-9]+").all();
+			if(sizes.isEmpty())
+				sizes = page.getHtml().regex("[0-9]+\\.[0-9]+MB").regex("[0-9]+\\.[0-9]+").all();
+			Collator callator = Collator.getInstance();
+			sizes.sort(callator);
+			int index = sizes.size() - 1;
+			for (int i = 0; i < sizes.size() - 1; i++) {
+				Spider.create(new BtSoTargetMagnetProcessor()).addUrl(targetUrls.get(index)).addPipeline(new BtSoPipeline()).run();
+				if(taskFinished)
+					break;
+				index--;
+			}
+		}else {
+			List<String> pageUrls = page.getHtml().links().regex("https://btso.pw/search/\\S+/page/[0-9]+").all();
+			page.addTargetRequests(pageUrls);
+			for (String targetUrl : targetUrls) {
+				Spider.create(new BtSoTargetMagnetProcessor()).addUrl(targetUrl).addPipeline(new BtSoPipeline()).run();
+			}
 		}
 	}
+	
 
 	@Override
 	public Site getSite() {

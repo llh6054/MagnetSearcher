@@ -1,11 +1,13 @@
 package com.magnetsearcher.processor.btsoprocessor;
 
+import com.magnetsearcher.util.ProcessUtil;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 public class BtSoTargetMagnetProcessor implements PageProcessor {
-
+	
 	private Site site = Site.me()
     		.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0")
     		.addHeader("Host"," btso.pw").addCookie("Cookie", "_ga=GA1.2.885174110.1475816482; __PPU_SESSION_1_470916_false=1481096488208|1|1481096488208|1|1; AD_enterTime=1481096461; AD_adst_b_M_300x50=0; AD_exoc_b_M_300x50=0; AD_jav_b_M_300x50=0; AD_javu_b_M_300x50=0; AD_wav_b_M_300x50=0; AD_wwwp_b_M_300x50=0; AD_clic_b_POPUNDER=2; AD_adst_b_SM_T_728x90=1; AD_popa_b_POPUNDER=1; _gat=1")
@@ -20,6 +22,8 @@ public class BtSoTargetMagnetProcessor implements PageProcessor {
 	@Override
 	public void process(Page page) {
 		String magnet = page.getHtml().$("#magnetLink").regex("magnet:\\?[^<]+").toString();
+		if(ProcessUtil.notISO(page))
+			BtSoKeyWordsProcessor.setTaskFinished(true);;
 		if(magnet != null && magnet != "")
 		 page.putField("magnet", magnet);
 	}

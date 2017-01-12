@@ -1,7 +1,10 @@
 package com.magnetsearcher.util;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import us.codecraft.webmagic.Page;
 
 public class ProcessUtil {
 
@@ -13,5 +16,10 @@ public class ProcessUtil {
 		if(matcher.matches());
 			needProcess = true;
 		return needProcess;
+	}
+	
+	public static boolean notISO(Page page) {
+	  List<String> magnets = page.getHtml().regex("\\.iso").all();
+	  return magnets.isEmpty();
 	}
 }
