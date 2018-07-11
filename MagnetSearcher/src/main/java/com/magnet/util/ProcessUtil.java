@@ -1,4 +1,4 @@
-package com.magnetsearcher.util;
+package com.magnet.util;
 
 import java.util.List;
 import java.util.regex.Matcher;

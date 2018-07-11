@@ -1,4 +1,4 @@
-package com.magnetsearcher.action;
+package com.magnet.action;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,9 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.magnetsearcher.util.ProcessUtil;
-import com.magnetsearcher.website.BtSoWebsite;
-import com.magnetsearcher.website.Website;
+import com.magnet.util.ProcessUtil;
+import com.magnet.website.BtSoWebsite;
+import com.magnet.website.Website;
 
 public class SearchWindow extends JFrame{
 

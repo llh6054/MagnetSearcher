@@ -1,11 +1,11 @@
-package com.magnetsearcher.action;
+package com.magnet.action;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
-import com.magnetsearcher.pipeline.BtSoPipeline;
-import com.magnetsearcher.processor.btsoprocessor.BtSoKeyWordsProcessor;
+import com.magnet.pipeline.BtSoPipeline;
+import com.magnet.processor.btsoprocessor.BtSoKeyWordsProcessor;
 
 import us.codecraft.webmagic.Spider;
 

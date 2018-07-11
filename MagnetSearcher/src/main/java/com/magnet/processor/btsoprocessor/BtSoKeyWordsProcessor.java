@@ -1,9 +1,10 @@
-package com.magnetsearcher.processor.btsoprocessor;
+package com.magnet.processor.btsoprocessor;
 
 import java.text.Collator;
 import java.util.List;
-import com.magnetsearcher.pipeline.BtSoPipeline;
-import com.magnetsearcher.util.ProcessUtil;
+
+import com.magnet.pipeline.BtSoPipeline;
+import com.magnet.util.ProcessUtil;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

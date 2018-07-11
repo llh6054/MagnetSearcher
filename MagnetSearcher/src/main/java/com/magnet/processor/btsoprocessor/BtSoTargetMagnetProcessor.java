@@ -1,6 +1,6 @@
-package com.magnetsearcher.processor.btsoprocessor;
+package com.magnet.processor.btsoprocessor;
 
-import com.magnetsearcher.util.ProcessUtil;
+import com.magnet.util.ProcessUtil;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

@@ -1,4 +1,4 @@
-package com.magnetsearcher.pipeline;
+package com.magnet.pipeline;
 
 import java.io.FileWriter;
 
